@@ -1,9 +1,7 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-
-
 
 const LoginScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -30,15 +28,23 @@ const LoginScreen = ({ navigation }) => {
         value={email}
         onChangeText={setEmail}
       />
-      
+
       <Button title="Log in" onPress={handleLogin} />
       <Text style={styles.or}>Or continue with</Text>
       <View style={styles.socialLoginContainer}>
-        <MaterialIcons name="apple" size= {30} onPress={() => {}} />
-        <FontAwesome name="google" size= {25} onPress={() => {}} />
-        <MaterialIcons name="facebook" size={25} color= 'blue' onPress={() => {}} />
+        <MaterialIcons name="apple" size={30} onPress={() => {}} />
+        <FontAwesome name="google" size={25} onPress={() => {}} />
+        <MaterialIcons
+          name="facebook"
+          size={25}
+          color="blue"
+          onPress={() => {}}
+        />
       </View>
-      <Text>Haven't an account? <Button title= "Register" Font='Circular Std' ></Button></Text>
+      <Text>
+        Haven't an account?{' '}
+        <Button title="Register" Font="Circular Std"></Button>
+      </Text>
     </View>
   );
 };
@@ -50,17 +56,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontStyle:'Poppins',
-    fontSize: 22,
+    fontStyle: 'Poppins',
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#356899',
-    width:1500,
-    
-
-},
+    width: 1500,
+  },
   subtitle: {
-    fontWeight:'bold',
+    fontWeight: 'bold',
     fontSize: 30,
     textAlign: 'left',
     marginVertical: 16,
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     padding: 8,
     marginVertical: 8,
     border: '#AFB0B6',
-    borderRadius:10,
+    borderRadius: 10,
   },
   or: {
     textAlign: 'center',
@@ -85,5 +89,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
-
-

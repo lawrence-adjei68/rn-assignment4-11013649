@@ -1,6 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import React ,{useState} from 'react';
+import { View, Text,TextInput,Image, StyleSheet, FlatList } from 'react-native';
 import JobCard from '../components/JobCards';
+import { SearchBar } from 'react-native-screens';
+
 
 const jobs = [
   { id: '1', title: 'Software Engineer', company: 'Facebook', salary: '$180,000', location: 'Accra, Ghana' },
@@ -15,18 +17,38 @@ const jobs = [
 
 const HomeScreen = ({ route }) => {
   const { name, email } = route.params;
+  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome, {name}!</Text>
+      <View style={styles.row}>
+      <Text 
+      style={styles.title}>Welcome, {name}
+      </Text>
+      <Image
+      source={require('../assets/elis.jpeg')}
+      style={styles.icon}
+      /></View>
       <Text style={styles.email}>{email}</Text>
       <Text style={styles.sectionTitle}>Featured Jobs</Text>
+      
+      
+      <TextInput
+        style={styles.input}
+        placeholder="Search a job or position"
+        
+      />
+
+
+<View style={[styles.cardContainer]}>
       <FlatList
         data={jobs}
+        style={styles.cardContainer} 
         renderItem={({ item }) => <JobCard job={item} />}
         keyExtractor={item => item.id}
         horizontal
       />
+      </View>
       <Text style={styles.sectionTitle}>Popular Jobs</Text>
       <FlatList
         data={jobs}
@@ -34,26 +56,58 @@ const HomeScreen = ({ route }) => {
         keyExtractor={item => item.id}
       />
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
     padding: 16,
+  },
+
+  cardContainer: {
+    color:'#fff',
+    padding: 2,
+    width: 570,  
+    height: 150,
+    marginHorizontal: 5,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
   },
-  email: {
-    fontSize: 18,
-    color: 'gray',
+  row:{
+    flexDirection: 'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    width:'90',
   },
+  icon: {
+    width: 70,
+    height:70,
+    borderRadius:50,
+  },
+  email: {
+    fontSize: 28,
+    color: 'gray',
+    marginVertical:-30,
+  },
+
+  
+
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginVertical: 16,
+    marginVertical: 36,
+  },
+  input: {
+    borderWidth: 1,
+    padding: 8,
+    marginVertical: 8,
+    border: '#AFB0B6',
+    borderRadius:10,
   },
 });
 
