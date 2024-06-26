@@ -34,96 +34,60 @@ export function HomeScreen() {
       </View>
       <View style={styles.texts}>
         <Text style={styles.iconText}>Send</Text>
-        <Text style={styles.iconText}> </Text>
+        <Text style={styles.iconText}>         </Text>
         <Text style={styles.iconText}>Receive</Text>
-        <Text style={styles.iconText}> </Text>
+        <Text style={styles.iconText}>        </Text>
         <Text style={styles.iconText}>Loan</Text>
-        <Text style={styles.iconText}> </Text>
+        <Text style={styles.iconText}>          </Text>
         <Text style={styles.iconText}>Topup</Text>
       </View>
       <View style={styles.trans}>
-        <Text style={{ fontWeight: 'bold', fontSize: 25 }}>Transaction</Text>
-        <Text
-          style={{ left: 180, fontSize: 20, color: 'blue', fontWeight: 'bold' }}
-        >
-          See All
-        </Text>
+        <Text style={{fontWeight:'bold',fontSize:25,}}>Transaction</Text>
+        <Text style={{left:180,fontSize:20,color:'blue',fontWeight:'bold'}}>See All</Text>
       </View>
       <View style={styles.tran}>
-        <Image
-          source={require('../assets/apple.png')}
-          style={{ width: 43, height: 43, resizeMode: 'contain' }}
-        />
-
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={{ marginLeft: 10, fontWeight: 'bold', fontSize: 18 }}>
-            Apple Store -$5,99
-          </Text>
-
-          <Text style={{ marginLeft: 10, fontSize: 16 }}>Entertainment</Text>
+        <Image source={require('../assets/apple.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
+        
+        <View style={{flexDirection:'column'}}>
+        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Apple Store                                       -$5,99</Text>
+        
+        <Text style={{marginLeft:10,  fontSize:16}}>Entertainment</Text>
         </View>
       </View>
       <View style={styles.tran}>
-        <Image
-          source={require('../assets/spotify.png')}
-          style={{ width: 43, height: 43, resizeMode: 'contain' }}
-        />
-
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={{ marginLeft: 10, fontWeight: 'bold', fontSize: 18 }}>
-            Apple Store -$12,99
-          </Text>
-
-          <Text style={{ marginLeft: 10, fontSize: 16 }}>Entertainment</Text>
+        <Image source={require('../assets/spotify.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
+        
+        <View style={{flexDirection:'column'}}>
+        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Spotify                                             -$12,99</Text>
+        
+        <Text style={{marginLeft:10,  fontSize:16}}>Music</Text>
         </View>
       </View>
       <View style={styles.tran}>
-        <Image
-          source={require('../assets/moneyTransfer.png')}
-          style={{ width: 43, height: 43, resizeMode: 'contain' }}
-        />
-
-        <View style={{ flexDirection: 'column' }}>
-          <Text
-            style={{
-              marginLeft: 10,
-              fontWeight: 'bold',
-              fontSize: 18,
-              color: 'blue',
-            }}
-          >
-            Apple Store -$300
-          </Text>
-
-          <Text style={{ marginLeft: 10, fontSize: 16 }}>Entertainment</Text>
+        <Image source={require('../assets/moneyTransfer.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
+        
+        <View style={{flexDirection:'column'}}>
+        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18, color:'blue'}}>Money Transfer                                 $300</Text>
+        
+        <Text style={{marginLeft:10,  fontSize:16}}>Transaction</Text>
         </View>
       </View>
       <View style={styles.tran}>
-        <Image
-          source={require('../assets/grocery.png')}
-          style={{ width: 43, height: 43, resizeMode: 'contain' }}
-        />
-
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={{ marginLeft: 10, fontWeight: 'bold', fontSize: 18 }}>
-            Apple Store -$88
-          </Text>
-
-          <Text style={{ marginLeft: 10, fontSize: 16 }}>Entertainment</Text>
+        <Image source={require('../assets/grocery.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
+        
+        <View style={{flexDirection:'column'}}>
+        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Apple Store                                        -$88</Text>
+        
+        <Text style={{marginLeft:10,  fontSize:16}}>Entertainment</Text>
         </View>
       </View>
       <View style={styles.tran}>
-        <Image
-          source={require('../assets/apple.png')}
-          style={{ width: 43, height: 43, resizeMode: 'contain' }}
-        />
-
-        <View style={{ flexDirection: 'column' }}>
-          <Text style={{ marginLeft: 10, fontWeight: 'bold', fontSize: 18 }}>
-            Apple Store -$5,99
-          </Text>
-
-          <Text style={{ marginLeft: 10, fontSize: 16 }}>Entertainment</Text>
+        <Image source={require('../assets/apple.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
+        
+        <View style={{flexDirection:'column'}}>
+        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Apple Store                                       -$5,99</Text>
+        
+        <Text style={{marginLeft:10,  fontSize:16}}>Entertainment</Text>
         </View>
       </View>
     </View>
@@ -138,10 +102,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
   },
-  tran: {
-    flexDirection: 'row',
-    marginVertical: 10,
-  },
+tran:{
+flexDirection:'row',
+marginVertical:10
+},
   icons: {
     flexDirection: 'row',
     marginHorizontal: 25,
@@ -149,6 +113,8 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     resizeMode: 'contain',
+    borderRadius: 10,
+    
   },
   texts: {
     flexDirection: 'row',
@@ -169,11 +135,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     color: '#000',
-    fontWeight: 'bold',
+    fontWeight:'bold',
   },
-  trans: {
-    flexDirection: 'row',
+  trans:{
+    flexDirection:'row',
     marginTop: 20,
+    
+
   },
 
   icon3: {
