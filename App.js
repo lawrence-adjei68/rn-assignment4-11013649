@@ -1,22 +1,36 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from '../rn-assignment4-11013649/screens/LoginScreen';
-import HomeScreen from '../rn-assignment4-11013649/screens/HomeScreen';
-import JobCards from './components/JobCards';
+// App.js
+import * as React from 'react';
+import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Provider as PaperProvider, DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from 'react-native-paper';
+import { HomeScreen } from '../rn-assignment4-11013649/screens/HomeScreen';
+import { SettingsScreen } from '../rn-assignment4-11013649/screens/SettingsScreen';
+import merge from 'deepmerge';
 
+const Tab = createBottomTabNavigator();
 
-const Stack = createStackNavigator();
-
-
+const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
+const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 
 export default function App() {
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+
+  const theme = isDarkTheme ? CombinedDarkTheme : CombinedDefaultTheme;
+
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={theme}>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Settings">
+            {() => <SettingsScreen toggleTheme={toggleTheme} />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
