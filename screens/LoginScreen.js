@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput,Linking, Button, StyleSheet } from 'react-native';
 import * as Font from 'expo-font';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { Link } from '@react-navigation/native';
 
 const LoginScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const handlePress = () => {
+    Linking.openURL('https://example.com')
+  };
 
   const handleLogin = () => {
     navigation.navigate('Home', { name, email });
@@ -41,11 +45,12 @@ const LoginScreen = ({ navigation }) => {
           onPress={() => {}}
         />
       </View>
-      <Text>
-        Haven't an account?{' '}
-        <Button title="Register" Font="Circular Std"></Button>
+      
+      <Text style={styles.text}>
+        Haven't an account? <Text style={styles.link} onPress={''}>Register</Text>
       </Text>
     </View>
+    
   );
 };
 
@@ -86,6 +91,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginBottom: 30,
   },
+  text: {
+    fontSize: 16,
+    textAlign:'center',
+  },
+  link: {
+    color:'blue',
+    textDecorationLine:'underline',
+  }
 });
 
 export default LoginScreen;

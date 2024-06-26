@@ -8,6 +8,7 @@ const JobCard = ({ job }) => {
       <Text style={styles.company}>{job.company}</Text>
       <Text style={styles.salary}>{job.salary}</Text>
       <Text style={styles.location}>{job.location}</Text>
+      
     </View>
   );
 };
