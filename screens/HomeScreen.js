@@ -1,95 +1,77 @@
-// screens/HomeScreen.js
-import * as React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, Image, Button, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export function HomeScreen() {
+
+const products = [
+  { id: '1', name: 'Office Wear', price: 120, image: require('../assets/dress1.png') },
+  { id: '2', name: 'Black', price: 120, image: require('../assets/dress2.png') },
+  { id: '3', name: 'Church Wear', price: 120, image: require('../assets/dress3.png') },
+  { id: '4', name: 'Lamerei', price: 120, image: require('../assets/dress4.png') },
+  { id: '5', name: '21WN', price: 120, image: require('../assets/dress5.png') },
+  { id: '6', name: 'Lopo', price: 120, image: require('../assets/dress6.png') },
+  { id: '7', name: '21WN', price: 120, image: require('../assets/dress7.png') },
+  { id: '8', name: 'Lame', price: 120, image: require('../assets/dress3.png') },
+  
+];
+
+const { width } = Dimensions.get('window');
+
+export default function HomeScreen({ navigation }) {
+  const [cart, setCart] = useState([]);
+  const [numColumns, setNumColumns] = useState(2);
+
+  useEffect(() => {
+    const loadCart = async () => {
+      const cartData = await AsyncStorage.getItem('cart');
+      if (cartData) {
+        setCart(JSON.parse(cartData));
+      }
+    };
+    loadCart();
+  }, []);
+
+  const addToCart = async (product) => {
+    const updatedCart = [...cart, product];
+    setCart(updatedCart);
+    await AsyncStorage.setItem('cart', JSON.stringify(updatedCart));
+  };
+
+  const renderProduct = ({ item }) => (
+    <View style={styles.product}>
+      <Image source={item.image} style={styles.productImage} />
+      <Text style={styles.productName}>{item.name}</Text>
+      <Text style={styles.cartItemDescription}>reversible angora cardigan</Text>
+      <Text style={styles.productPrice}>${item.price}</Text>
+      <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
+      <Image source={require('../assets/add_circle.png')} style={styles.addButton} />
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Image source={require('../assets/profile.png')} style={styles.icon1} />
-        <View style={styles.roww}>
-          <Text style={styles.title}>Welcome back,</Text>
-          <Text style={styles.name}>Eric Atsu</Text>
+        <View style={styles.glam}>
+        <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+      <Image source={require('../assets/Menu.png')} style={{marginRight: 120}}/>
+      </TouchableOpacity>
+        <Image source={require('../assets/Logo.png')} style={{marginRight: 100}} />
+        <Image source={require('../assets/Search.png')} style={{marginRight: 20}} />
+        <Image source={require('../assets/shoppingBag.png')} style={{}} />
         </View>
-        <Image source={require('../assets/search.png')} style={styles.icon2} />
-      </View>
-      <Image source={require('../assets/Card.png')} style={styles.icon3} />
-      <View style={styles.icons}>
-        <Image source={require('../assets/send.png')} style={styles.icons} />
-
-        <Image source={require('../assets/recieve.png')} style={styles.icons} />
-
-        <Image source={require('../assets/loan.png')} style={styles.icons} />
-
-        <Image source={require('../assets/topUp.png')} style={styles.icons} />
-      </View>
-      <View style={styles.texts}>
-        <Text style={styles.iconText}>Send</Text>
-        <Text style={styles.iconText}>         </Text>
-        <Text style={styles.iconText}>Receive</Text>
-        <Text style={styles.iconText}>        </Text>
-        <Text style={styles.iconText}>Loan</Text>
-        <Text style={styles.iconText}>          </Text>
-        <Text style={styles.iconText}>Topup</Text>
-      </View>
-      <View style={styles.trans}>
-        <Text style={{fontWeight:'bold',fontSize:25,}}>Transaction</Text>
-        <Text style={{left:180,fontSize:20,color:'blue',fontWeight:'bold'}}>See All</Text>
-      </View>
-      <View style={styles.tran}>
-        <Image source={require('../assets/apple.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
-        
-        <View style={{flexDirection:'column'}}>
-        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Apple Store                                       -$5,99</Text>
-        
-        <Text style={{marginLeft:10,  fontSize:16}}>Entertainment</Text>
-        </View>
-      </View>
-      <View style={styles.tran}>
-        <Image source={require('../assets/spotify.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
-        
-        <View style={{flexDirection:'column'}}>
-        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Spotify                                             -$12,99</Text>
-        
-        <Text style={{marginLeft:10,  fontSize:16}}>Music</Text>
-        </View>
-      </View>
-      <View style={styles.tran}>
-        <Image source={require('../assets/moneyTransfer.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
-        
-        <View style={{flexDirection:'column'}}>
-        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18, color:'blue'}}>Money Transfer                                 $300</Text>
-        
-        <Text style={{marginLeft:10,  fontSize:16}}>Transaction</Text>
-        </View>
-      </View>
-      <View style={styles.tran}>
-        <Image source={require('../assets/grocery.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
-        
-        <View style={{flexDirection:'column'}}>
-        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Apple Store                                        -$88</Text>
-        
-        <Text style={{marginLeft:10,  fontSize:16}}>Entertainment</Text>
-        </View>
-      </View>
-      <View style={styles.tran}>
-        <Image source={require('../assets/apple.png')} style={{width:43 , height:43 , resizeMode: 'contain'}}/>
-        
-        <View style={{flexDirection:'column'}}>
-        <Text style={{marginLeft:10, fontWeight:'bold', fontSize:18}}>Apple Store                                       -$5,99</Text>
-        
-        <Text style={{marginLeft:10,  fontSize:16}}>Entertainment</Text>
-        </View>
-      </View>
+        <View style={styles.title}>
+            <Text style={{fontSize:25 , fontFamily: 'Didot' , marginRight: 30, marginLeft:10}}>OUR STORY</Text>
+            <Image source={require('../assets/Listview.png')} style={{marginLeft: 140}} />
+            <Image source={require('../assets/Filter.png')} style={{marginLeft: 20}}/>
+        </View >
+      <FlatList
+        data={products}
+        key={(numColumns)} // Change the key prop when the number of columns changes
+        keyExtractor={(item) => item.id}
+        renderItem={renderProduct}
+        numColumns={numColumns}
+        columnWrapperStyle={numColumns > 1 && styles.row}
+      />
     </View>
   );
 }
@@ -99,63 +81,68 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  title: {
-    fontSize: 24,
-  },
-tran:{
-flexDirection:'row',
-marginVertical:10
-},
-  icons: {
-    flexDirection: 'row',
-    marginHorizontal: 25,
-    justifyContent: 'space-between',
-    width: 30,
-    height: 30,
-    resizeMode: 'contain',
-    borderRadius: 10,
-    
-  },
-  texts: {
-    flexDirection: 'row',
-    marginHorizontal: 50,
-  },
-
-  name: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  icon2: {
-    width: 50,
-    height: 50,
-    alignItems: 'right',
-    marginHorizontal: 90,
-  },
-  iconText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#000',
-    fontWeight:'bold',
-  },
-  trans:{
-    flexDirection:'row',
-    marginTop: 20,
-    
-
-  },
-
-  icon3: {
-    alignItems: 'right',
-    marginHorizontal: 20,
-    marginVertical: 30,
-  },
-
   row: {
-    flexDirection: 'row',
-    alignItems: 'left',
+    justifyContent: 'space-between',
   },
-  roww: {
-    padding: 5,
-    alignItems: 'left',
+  glam: {
+    flexDirection: 'row',
+    height: 60,
+    width: '100%',
+    
+
+  },
+  title:{
+    flexDirection:'row',
+
+  },
+  menuIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 8,
+    
+  },
+  product: {
+    flex: 1,
+    margin: 8,
+    height:330,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: 'transparent',
+    paddingBottom: 16,
+  },
+  productImage: {
+    width: '100%',
+    height: 240,
+    resizeMode: 'cover',
+  },
+  productName: {
+    fontSize: 16,
+    fontWeight:'bold',
+    fontFamily:'courier new',
+    marginVertical: 8,
+    textAlign: 'left',
+  },
+  productPrice: {
+    fontSize: 14,
+    color: '#FF8000',
+    textAlign: 'left',
+    marginVertical:30,
+
+  },
+  addButton: {
+    borderRadius: 50,
+    padding: 8,
+    marginTop: -75,
+    marginLeft:70,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  cartItemDescription: {
+    fontSize: 14,
+    color: '#888',
+    marginVertical: -10,
   },
 });
